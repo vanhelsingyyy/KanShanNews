@@ -1,6 +1,7 @@
 package me.vanhely.kanshannews;
 
 import me.vanhely.kanshannews.model.StartImageData;
+import me.vanhely.kanshannews.model.ThemesData;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;
@@ -12,6 +13,9 @@ public interface KanShanApi {
     @GET(KanShanFactory.apiVersion + "start-image/{size}")
     Observable<StartImageData> getStartImage(@Path("size") String size);
 
+    //主题日报列表
+    @GET(KanShanFactory.apiVersion+"themes")
+    Observable<ThemesData> getThenesData();
 
 
 }

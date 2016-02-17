@@ -20,7 +20,6 @@
         android:layout_marginRight="@dimen/basic25dp"
         android:layout_marginEnd="@dimen/basic25dp"
         android:textSize="@dimen/basic16sp"
-        android:text="Images"
         android:layout_gravity="right|bottom" />
 
     <me.vanhely.kanshannews.widget.RecyclableImageView

@@ -39,4 +39,7 @@ public class BaseActivity extends AppCompatActivity {
         if (compositeSubscription != null && !compositeSubscription.isUnsubscribed())
             compositeSubscription.unsubscribe();
     }
+
+
+
 }

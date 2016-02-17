@@ -1,11 +1,12 @@
 package me.vanhely.kanshannews;
 
-import android.app.Application;
 import android.content.Context;
+
+import org.litepal.LitePalApplication;
 
 import me.vanhely.kanshannews.utils.SPUtils;
 
-public class App extends Application {
+public class App extends LitePalApplication {
 
     public static Context mContext;
 
@@ -14,6 +15,7 @@ public class App extends Application {
         super.onCreate();
         mContext = this;
         SPUtils.register(this);
+
     }
 
 }

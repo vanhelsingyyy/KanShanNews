@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">KanShanNews</string>
+    <string name="menu_mode">夜间模式</string>
+    <string name="menu_setting">设置选项</string>
+    <string name="nav_home">首页</string>
+    <string name="tool_open">open</string>
+    <string name="tool_close">close</string>
+    <string name="login_tv">请登录</string>
+    <string name="theme_home">首页</string>
 </resources>

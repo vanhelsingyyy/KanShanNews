@@ -5,31 +5,36 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.vanhely.kanshannews.R;
 
 
 public abstract class ToolbarActivity extends BaseActivity {
 
-    public Toolbar toolbar;
-    public TextView toolName;
-    public DrawerLayout mDrawerLayout;
+    @Bind(R.id.toolname)
+    protected TextView toolName;
+    @Bind(R.id.toolbar)
+    protected Toolbar toolbar;
+    @Bind(R.id.drawer)
+    protected DrawerLayout mDrawerLayout;
+
     public boolean isBack = false;
-    private ListView leftMenu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(initContentView());
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        leftMenu = (ListView) findViewById(R.id.lv_left_menu);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolName = (TextView) findViewById(R.id.toolname);
+        ButterKnife.bind(this);
 
         if (toolbar != null && mDrawerLayout != null) {
             toolbar.setTitle("");
@@ -68,6 +73,9 @@ public abstract class ToolbarActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void closeDrawer(){
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+    }
 
     public void isBack(boolean isBack) {
         this.isBack = isBack;
@@ -80,8 +88,5 @@ public abstract class ToolbarActivity extends BaseActivity {
         toolName.setText(name);
     }
 
-
     public abstract int initContentView();
-
-
 }

@@ -46,4 +46,5 @@ public class ActivityUtils {
         }
         return false;
     }
+
 }

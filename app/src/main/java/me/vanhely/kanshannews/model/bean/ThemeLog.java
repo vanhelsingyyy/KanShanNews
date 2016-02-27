@@ -2,9 +2,7 @@ package me.vanhely.kanshannews.model.bean;
 
 import org.litepal.crud.DataSupport;
 
-/**
- * Created by Administrator on 2016/2/14 0014.
- */
+
 public class ThemeLog extends DataSupport{
 
     private String themeImage;

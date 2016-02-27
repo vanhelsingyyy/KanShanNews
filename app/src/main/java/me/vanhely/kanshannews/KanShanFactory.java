@@ -4,7 +4,7 @@ package me.vanhely.kanshannews;
 public class KanShanFactory {
 
     public static final String baseUri = "http://news-at.zhihu.com/";
-    public static final String apiVersion = "api/5/";
+    public static final String apiVersion = "api/4/";
     static KanShanApi singletonKanShanApi;
 
 

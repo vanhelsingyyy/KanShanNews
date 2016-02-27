@@ -8,7 +8,7 @@ import org.litepal.crud.DataSupport;
 import java.util.List;
 
 
-public class ThemesData extends DataSupport {
+public class ThemeListData {
 
     private List<OthersEntity> others;
 
@@ -21,7 +21,6 @@ public class ThemesData extends DataSupport {
     }
 
     public static class OthersEntity {
-
 
         public int color;
         @Expose
@@ -37,16 +36,6 @@ public class ThemesData extends DataSupport {
         @SerializedName("name")
         public String themeName;
 
-        @Override
-        public String toString() {
-            return "OthersEntity{" +
-                    "color=" + color +
-                    ", themeImage='" + themeImage + '\'' +
-                    ", themeDesc='" + themeDesc + '\'' +
-                    ", themeId=" + themeId +
-                    ", themeName='" + themeName + '\'' +
-                    '}';
-        }
     }
 
 

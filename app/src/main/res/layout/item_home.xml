@@ -10,6 +10,7 @@
         android:drawableLeft="@drawable/home"
         android:drawableStart="@drawable/home"
         android:gravity="center_vertical"
+        android:drawablePadding="@dimen/basic8dp"
         android:paddingLeft="@dimen/basic15dp"
         android:text="@string/theme_home"
         android:textColor="@color/md_blue_400"

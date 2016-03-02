@@ -24,6 +24,7 @@ import me.vanhely.kanshannews.model.bean.Stories;
 import me.vanhely.kanshannews.model.bean.ThemeLog;
 import me.vanhely.kanshannews.model.bean.TopStories;
 import me.vanhely.kanshannews.ui.base.DrawerViewActivity;
+import me.vanhely.kanshannews.utils.SPUtils;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -53,11 +54,15 @@ public class MainActivity extends DrawerViewActivity implements SwipeRefreshLayo
                 } else if (position > 1) {
                     ThemeLog themeLog = themeList.get(position - 2);
                     fragmentListener.onSelectOther(themeLog);
-                }
+                };
+                leftMenu.setItemChecked(position,true);
                 closeDrawer();
             }
         });
     }
+
+    @Override
+    protected void initData() {}
 
     @Override
     public int initContentView() {

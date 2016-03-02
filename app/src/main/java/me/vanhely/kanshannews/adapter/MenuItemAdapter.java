@@ -12,6 +12,7 @@ import java.util.List;
 import me.vanhely.kanshannews.App;
 import me.vanhely.kanshannews.R;
 import me.vanhely.kanshannews.model.bean.ThemeLog;
+import me.vanhely.kanshannews.utils.SPUtils;
 
 
 public class MenuItemAdapter extends BaseAdapter {

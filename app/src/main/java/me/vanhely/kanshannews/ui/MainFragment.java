@@ -1,6 +1,7 @@
 package me.vanhely.kanshannews.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,8 @@ import me.vanhely.kanshannews.App;
 import me.vanhely.kanshannews.R;
 import me.vanhely.kanshannews.adapter.StoriesItemAdapter;
 import me.vanhely.kanshannews.adapter.ThemesItemAdapter;
+import me.vanhely.kanshannews.model.ContentData;
+import me.vanhely.kanshannews.model.ExtraData;
 import me.vanhely.kanshannews.model.StoriesData;
 import me.vanhely.kanshannews.model.ThemeContentData;
 import me.vanhely.kanshannews.model.TopStoriesData;
@@ -27,6 +30,7 @@ import me.vanhely.kanshannews.model.bean.TopStories;
 import me.vanhely.kanshannews.ui.base.BaseActivity;
 import me.vanhely.kanshannews.ui.base.BaseFragment;
 import me.vanhely.kanshannews.utils.DateUtils;
+import me.vanhely.kanshannews.widget.ScrollViewpager;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -34,7 +38,7 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 
-public class MainFragment extends BaseFragment implements MainActivity.FragmentListener {
+public class MainFragment extends BaseFragment implements MainActivity.FragmentListener{
 
     private static final String TAG = "MainFragment";
     @Bind(R.id.rv_content)
@@ -51,7 +55,6 @@ public class MainFragment extends BaseFragment implements MainActivity.FragmentL
     private int lastPosition;
     private int themeId;
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -60,6 +63,17 @@ public class MainFragment extends BaseFragment implements MainActivity.FragmentL
         }
         storiesData = (StoriesData) getArguments().getSerializable(App.storiesDataKey);
         topStoriesData = (TopStoriesData) getArguments().getSerializable(App.topStoriesDataKey);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isTag) {
+            storiesItemAdapter.notifyDataSetChanged();
+        } else {
+            themesItemAdapter.notifyDataSetChanged();
+        }
 
     }
 
@@ -74,6 +88,7 @@ public class MainFragment extends BaseFragment implements MainActivity.FragmentL
         setHomeData();
         rvContent.addOnScrollListener(new MyScrollListener());
     }
+
 
     @Override
     public void onSelectHome() {
@@ -127,6 +142,9 @@ public class MainFragment extends BaseFragment implements MainActivity.FragmentL
             rvContent.setLayoutManager(mLinearLayoutManager);
             storiesItemAdapter = new StoriesItemAdapter(latestStoriesList, topStoriesList);
             rvContent.setAdapter(storiesItemAdapter);
+
+            setListener();
+
         }
     }
 
@@ -143,8 +161,10 @@ public class MainFragment extends BaseFragment implements MainActivity.FragmentL
             } else {
                 themesItemAdapter.upThemeData(themeContentData);
             }
+            setListener();
         }
     }
+
 
     /**
      * 设置RecyclerView的滚动监听
@@ -176,6 +196,8 @@ public class MainFragment extends BaseFragment implements MainActivity.FragmentL
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
             lastPosition = mLinearLayoutManager.findLastVisibleItemPosition();
+
+
 
         }
     }
@@ -226,7 +248,38 @@ public class MainFragment extends BaseFragment implements MainActivity.FragmentL
         } else {
             loadThemeContent(themeId);
         }
+    }
+
+
+    protected void setListener() {
+        if (isTag) {
+            storiesItemAdapter.setOnClickListener(new StoriesItemAdapter.OnClickListener() {
+                @Override
+                public void onCardClick(View v, int position, int id) {
+                    startContentActivity(id + "");
+                }
+                @Override
+                public void onPageClick(View v, int position, int id) {
+                    startContentActivity(id+"");
+                }
+            });
+        }  else {
+            themesItemAdapter.setOnThemeClickListener(new ThemesItemAdapter.OnThemeClickListener() {
+                @Override
+                public void onThemeClick(View v, int position, int id) {
+                    startContentActivity(id+"");
+                }
+            });
+        }
+    }
+
+    public void startContentActivity(String id) {
+        Intent intent = new Intent(mainActivity, ContentActivity.class);
+        intent.putExtra(App.contentIdKey, id);
+        startActivity(intent);
 
     }
+
+    ;
 
 }

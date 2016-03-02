@@ -41,10 +41,6 @@ public abstract class DrawerViewActivity extends ToolbarActivity {
         if (themeList != null) {
             leftMenu.setAdapter(new MenuItemAdapter(themeList));
         }
-
     }
-
-
-
 
 }

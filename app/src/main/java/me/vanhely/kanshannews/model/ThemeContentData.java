@@ -7,14 +7,11 @@ public class ThemeContentData {
 
     private String description;
     private String background;
-    private int color;
     private String name;
     private String image;
     private String image_source;
 
     private List<StoriesEntity> stories;
-
-    private List<EditorsEntity> editors;
 
     public void setDescription(String description) {
         this.description = description;
@@ -22,10 +19,6 @@ public class ThemeContentData {
 
     public void setBackground(String background) {
         this.background = background;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
     }
 
     public void setName(String name) {
@@ -44,20 +37,12 @@ public class ThemeContentData {
         this.stories = stories;
     }
 
-    public void setEditors(List<EditorsEntity> editors) {
-        this.editors = editors;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public String getBackground() {
         return background;
-    }
-
-    public int getColor() {
-        return color;
     }
 
     public String getName() {
@@ -74,10 +59,6 @@ public class ThemeContentData {
 
     public List<StoriesEntity> getStories() {
         return stories;
-    }
-
-    public List<EditorsEntity> getEditors() {
-        return editors;
     }
 
     public static class StoriesEntity {
@@ -119,51 +100,4 @@ public class ThemeContentData {
         }
     }
 
-    public static class EditorsEntity {
-        private String url;
-        private String bio;
-        private int id;
-        private String avatar;
-        private String name;
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public void setBio(String bio) {
-            this.bio = bio;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public void setAvatar(String avatar) {
-            this.avatar = avatar;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public String getBio() {
-            return bio;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public String getAvatar() {
-            return avatar;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
 }

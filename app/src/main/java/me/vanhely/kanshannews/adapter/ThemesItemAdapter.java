@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import me.vanhely.kanshannews.App;
 import me.vanhely.kanshannews.R;
 import me.vanhely.kanshannews.model.ThemeContentData;
+import me.vanhely.kanshannews.utils.SPUtils;
 
 
 public class ThemesItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -25,6 +26,7 @@ public class ThemesItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int TYPE_CARD = 1;
     private ThemeContentData themeContentData;
     private LayoutInflater mInflater;
+    private OnThemeClickListener themeClickListener;
 
     public ThemesItemAdapter(ThemeContentData themeContentData) {
         this.themeContentData = themeContentData;
@@ -36,7 +38,7 @@ public class ThemesItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mInflater = LayoutInflater.from(parent.getContext());
         if (viewType == TYPE_IMAGE) {
-            return new ImageViewHolder(mInflater.inflate(R.layout.item_topstories, parent, false));
+            return new ImageViewHolder(mInflater.inflate(R.layout.viewpage_item, parent, false));
         } else {
             return new CardViewHolder(mInflater.inflate(R.layout.item_stories, parent, false));
         }
@@ -51,9 +53,11 @@ public class ThemesItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 imageViewHolder.tvTop.setText(themeContentData.getDescription());
                 break;
             case TYPE_CARD:
+                final int mPosition = position - 1;
                 CardViewHolder cardViewHolder = (CardViewHolder) holder;
-                ThemeContentData.StoriesEntity stories = themeContentData.getStories().get(position - 1);
+                final ThemeContentData.StoriesEntity stories = themeContentData.getStories().get(mPosition);
                 List<String> images = stories.getImages();
+
                 if (images != null && images.size() > 0) {
                     cardViewHolder.ivCard.setVisibility(View.VISIBLE);
                     Picasso.with(App.mContext).load(stories.getImages().get(0))
@@ -61,7 +65,25 @@ public class ThemesItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 } else {
                     cardViewHolder.ivCard.setVisibility(View.GONE);
                 }
+
+                Boolean isRead = (Boolean) SPUtils.get(stories.getId() + "", false);
+                if (isRead) {
+                    cardViewHolder.tvCard.setTextColor(App.mContext.getResources().getColor(R.color.md_blue_grey_300));
+                }else {
+                    cardViewHolder.tvCard.setTextColor(App.mContext.getResources().getColor(R.color.md_black_1000));
+                }
+
+
                 cardViewHolder.tvCard.setText(stories.getTitle());
+
+                if (themeClickListener != null) {
+                    cardViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            themeClickListener.onThemeClick(v,mPosition,stories.getId());
+                        }
+                    });
+                }
                 break;
         }
     }
@@ -108,5 +130,13 @@ public class ThemesItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void upThemeData(ThemeContentData themeContentData) {
         this.themeContentData = themeContentData;
         notifyDataSetChanged();
+    }
+
+    public interface OnThemeClickListener{
+        void onThemeClick(View v, int position,int id);
+    }
+
+    public void setOnThemeClickListener(OnThemeClickListener themeClickListener) {
+        this.themeClickListener = themeClickListener;
     }
 }

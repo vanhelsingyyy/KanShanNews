@@ -39,6 +39,8 @@ public abstract class BaseFragment extends Fragment {
         return view;
     }
 
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

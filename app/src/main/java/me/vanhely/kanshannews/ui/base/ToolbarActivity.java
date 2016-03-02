@@ -9,10 +9,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,7 +29,7 @@ public abstract class ToolbarActivity extends BaseActivity {
     protected TextView toolName;
     @Bind(R.id.toolbar)
     protected Toolbar toolbar;
-    @Bind(R.id.drawer)
+
     protected DrawerLayout mDrawerLayout;
 
     public boolean isBack = false;
@@ -35,8 +39,9 @@ public abstract class ToolbarActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(initContentView());
         ButterKnife.bind(this);
+        initData();
 
-        if (toolbar != null && mDrawerLayout != null) {
+        if (toolbar != null) {
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
 
@@ -44,8 +49,13 @@ public abstract class ToolbarActivity extends BaseActivity {
              * 判断toolbar home键的状态
              */
             if (isBack) {
+                toolName.setVisibility(View.GONE);
+                toolbar.getBackground().setAlpha(0);
                 toolbar.setNavigationIcon(R.drawable.back);
             } else {
+                mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+                toolName.setVisibility(View.VISIBLE);
+
                 getSupportActionBar().setHomeButtonEnabled(true);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.tool_open, R.string.tool_close);
@@ -57,6 +67,8 @@ public abstract class ToolbarActivity extends BaseActivity {
             }
         }
     }
+
+    protected abstract void initData();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -77,7 +89,7 @@ public abstract class ToolbarActivity extends BaseActivity {
         mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
-    public void isBack(boolean isBack) {
+    public void setBack(boolean isBack) {
         this.isBack = isBack;
     }
 

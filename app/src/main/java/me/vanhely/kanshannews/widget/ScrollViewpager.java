@@ -161,20 +161,20 @@ public class ScrollViewpager extends FrameLayout {
             view.setOnTouchListener(new View.OnTouchListener() {
 
                 private long downTime;
-                private int downX;
+                private float downX;
 
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             pageIsStop = true;
-                            downX = (int) event.getX();
+                            downX = (float) event.getX();
                             downTime = System.currentTimeMillis();
                             break;
                         case MotionEvent.ACTION_UP:
                             if (System.currentTimeMillis() - downTime < 500 && downX == event.getX()) {
                                 if (onPageClickListener != null) {
-                                    onPageClickListener.onPageClick(view, mPosition,id);
+                                    onPageClickListener.onPageClick(view, mPosition, id);
                                 }
                             }
                             pageIsStop = false;

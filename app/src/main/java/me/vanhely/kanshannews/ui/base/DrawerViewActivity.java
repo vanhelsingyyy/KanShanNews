@@ -26,10 +26,10 @@ public abstract class DrawerViewActivity extends ToolbarActivity {
     public List<ThemeLog> themeList;
 
     @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         themeList = DataSupport.findAll(ThemeLog.class);
         setDrawer();
-        super.onPostCreate(savedInstanceState);
     }
 
     /**

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KanShanNews</string>
+    <string name="app_name">看山日报</string>
     <string name="menu_mode">夜间模式</string>
     <string name="menu_setting">设置选项</string>
     <string name="nav_home">首页</string>

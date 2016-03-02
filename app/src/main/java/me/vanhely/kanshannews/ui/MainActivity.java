@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -40,25 +41,34 @@ public class MainActivity extends DrawerViewActivity implements SwipeRefreshLayo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setSwipeRefresh();
         Intent intent = getIntent();
         StoriesData storiesData = (StoriesData) intent.getSerializableExtra(App.storiesDataKey);
         TopStoriesData topStoriesData = (TopStoriesData) intent.getSerializableExtra(App.topStoriesDataKey);
         setFragment(storiesData, topStoriesData);
 
-        leftMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 1) {
-                    fragmentListener.onSelectHome();
-                } else if (position > 1) {
-                    ThemeLog themeLog = themeList.get(position - 2);
-                    fragmentListener.onSelectOther(themeLog);
-                };
-                leftMenu.setItemChecked(position,true);
-                closeDrawer();
-            }
-        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (leftMenu != null) {
+            leftMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (position == 1) {
+                        fragmentListener.onSelectHome();
+                    } else if (position > 1) {
+                        ThemeLog themeLog = themeList.get(position - 2);
+                        fragmentListener.onSelectOther(themeLog);
+                    };
+                    leftMenu.setItemChecked(position,true);
+                    closeDrawer();
+                }
+            });
+        }
+
     }
 
     @Override

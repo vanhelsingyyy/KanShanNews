@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -97,6 +98,7 @@ public abstract class ToolbarActivity extends BaseActivity {
      * 设置toolbar的title
      */
     public void setToolName(String name) {
+        if (toolName != null)
         toolName.setText(name);
     }
 

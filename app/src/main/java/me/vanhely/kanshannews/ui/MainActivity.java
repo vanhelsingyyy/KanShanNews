@@ -41,7 +41,7 @@ public class MainActivity extends DrawerViewActivity implements SwipeRefreshLayo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setBack(false);
         setSwipeRefresh();
         Intent intent = getIntent();
         StoriesData storiesData = (StoriesData) intent.getSerializableExtra(App.storiesDataKey);

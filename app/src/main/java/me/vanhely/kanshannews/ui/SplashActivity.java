@@ -137,7 +137,7 @@ public class SplashActivity extends BaseActivity {
     private void setStartData(StartImageData startImageData) {
         if (startImageData != null) {
             Picasso with = Picasso.with(App.mContext);
-            with.setIndicatorsEnabled(true);
+//            with.setIndicatorsEnabled(true);
             splashTv.setText(startImageData.getText());
             with.load(startImageData.getImg()).into(splashIv);
         }

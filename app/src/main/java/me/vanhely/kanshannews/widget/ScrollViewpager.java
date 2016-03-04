@@ -149,7 +149,7 @@ public class ScrollViewpager extends FrameLayout {
             final int id = topStories.getId();
 
             Picasso with = Picasso.with(App.mContext);
-            with.setIndicatorsEnabled(true);
+//            with.setIndicatorsEnabled(true);
             with.load(topStories.getImage()).into(ivTop);
 
             tvTop.setText(topStories.getTitle());

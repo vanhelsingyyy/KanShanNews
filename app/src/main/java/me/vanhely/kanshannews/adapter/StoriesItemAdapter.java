@@ -14,16 +14,12 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 import me.vanhely.kanshannews.App;
 import me.vanhely.kanshannews.R;
 import me.vanhely.kanshannews.model.bean.Stories;
 import me.vanhely.kanshannews.model.bean.TopStories;
 import me.vanhely.kanshannews.utils.SPUtils;
 import me.vanhely.kanshannews.widget.ScrollViewpager;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 
 public class StoriesItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ScrollViewpager.OnPageClickListener {

@@ -60,8 +60,7 @@ public class ThemesItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                 if (images != null && images.size() > 0) {
                     cardViewHolder.ivCard.setVisibility(View.VISIBLE);
-                    Picasso.with(App.mContext).load(stories.getImages().get(0))
-                            .error(new ColorDrawable(0XFFFFFF)).into(cardViewHolder.ivCard);
+                    Picasso.with(App.mContext).load(stories.getImages().get(0)).into(cardViewHolder.ivCard);
                 } else {
                     cardViewHolder.ivCard.setVisibility(View.GONE);
                 }
